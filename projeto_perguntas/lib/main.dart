@@ -6,14 +6,14 @@ import './resposta.dart';
 main() => runApp(PerguntaApp());
 
 class _PerguntaAppState extends State<PerguntaApp> {
-  var _perguntarSelecionada = 0;
+  var _perguntaSelecionada = 0;
 
   void _responder() {
     setState(() {
-      _perguntarSelecionada++;
+      _perguntaSelecionada++;
     });
 
-    print(_perguntarSelecionada);
+    print(_perguntaSelecionada);
   }
 
   @override
@@ -29,6 +29,12 @@ class _PerguntaAppState extends State<PerguntaApp> {
       },
     ];
 
+    List<Widget> respostas = [];
+    for (String textoResp
+        in perguntas[_perguntaSelecionada].cast()['respostas']) {
+      respostas.add(Resposta(textoResp, _responder));
+    }
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -36,10 +42,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
         ),
         body: Column(
           children: <Widget>[
-            Questao(perguntas[_perguntarSelecionada]['texto'].toString()),
-            Resposta("Resposta 1", _responder),
-            Resposta("Resposta 2", _responder),
-            Resposta("resposta 3", _responder),
+            Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
+            ...respostas
           ],
         ),
       ),
