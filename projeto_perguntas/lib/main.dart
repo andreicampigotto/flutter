@@ -6,21 +6,33 @@ main() => runApp(PerguntaApp());
 
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
+  var _total = 0;
   final _perguntas = const [
     {
       'texto': 'Qual sua cor favorita? ',
-      'respostas': ['Branco', 'Preto', 'Verde', 'Azul']
+      'respostas': [
+        {'texto': 'Branco', 'score': 1},
+        {'texto': 'Preto', 'score': 2},
+        {'texto': 'Verde', 'score': 3},
+        {'texto': 'Azul', 'score': 4},
+      ],
     },
     {
       'texto': 'Qual seu animal favorito? ',
-      'respostas': ['Gato', 'Coruja', 'Pinguim', 'Leão']
+      'respostas': [
+        {'texto': 'Gato', 'score': 4},
+        {'texto': 'Coruja', 'score': 3},
+        {'texto': 'Pinguim', 'score': 2},
+        {'texto': 'Leão', 'score': 1},
+      ],
     },
   ];
 
-  void _responder() {
+  void _responder(int score) {
     if (estaSelecionado) {
       setState(() {
         _perguntaSelecionada++;
+        _total += score;
       });
     }
     print(_perguntaSelecionada);
