@@ -25,13 +25,12 @@ class Questionario extends StatelessWidget {
     return Column(
       children: <Widget>[
         Questao(perguntas[perguntaSelecionada]['texto'].toString()),
-        ...respostas
-            .map((resp){
-            return Resposta(
+        ...respostas.map((resp) {
+          return Resposta(
             resp['texto'].toString(),
             () => responder(int.parse(resp['score'].toString())),
-          );  
-            },
+          );
+        }).toList(),
       ],
     );
   }
